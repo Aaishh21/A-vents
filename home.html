@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>A-vents — City Events</title>
+  <link rel="stylesheet" href="home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Anton&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h2 class="logo">
+      <a href="home.html" aria-label="Homepage">
+        <span>A</span>-<span>v</span>e<span>n</span>t<span>s</span>
+      </a>
+    </h2>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="Events.html">Events</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </nav>
+    <div class="lang">
+      <button class="lang-btn">
+        <img src="icons/language_icon.png" alt="language_icon" width="20">
+        <span>Eng ▼</span>
+      </button>
+      <ul class="lang-dropdown">
+        <li data-lang="en">English</li>
+        <li data-lang="ru">Русский</li>
+        <li data-lang="kz">Қазақша</li>
+      </ul>
+    </div>
+    <button class="hamburger">☰</button>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <button class="close-mobile-menu" id="closeMobileMenu">×</button>
+    <ul>
+      <li><a href="home.html" class="active">Home</a></li>
+      <li><a href="Events.html">Events</a></li>
+      <li><a href="about.html">About us</a></li>
+      <div class="lang" id="mobileLang">
+        <button class="lang-btn" id="mobileLangBtn">
+          <img src="icons/language_icon.png" alt="language_icon" width="20">
+          <span>Eng ▼</span>
+        </button>
+        <ul class="lang-dropdown" id="mobileLangDropdown">
+          <li data-lang="en">English</li>
+          <li data-lang="ru">Русский</li>
+          <li data-lang="kz">Қазақша</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+
+  <button class="scroll-to-top" id="scrollToTop" title="Go to top">
+    <img src="https://img.icons8.com/ios-filled/50/f7ef4d/up--v1.png" alt="arrow up">
+  </button>
+
+  <main>
+    <div class="hero">
+      <h1>World <span class="highlight"><img src="img/mus.png" alt=""></span> Famous</h1>
+      <h1>Music festival</h1>
+
+      <div class="artist-group">
+        <img src="img/artist.png"
+          alt="Concert crowd with colorful lights">
+      </div>
+    </div>
+    <div class="ticker">
+        <span>Enhypen + Jennie + Lisa + Ateez + Bruno Mars + Sabrina Carpenter + Taylor Swift + Beyoncé + Stray Kids +
+          BTS + Ariana Grande + XG + Katseye</span>
+    </div>
+
+    <section class="ticket">
+      <div class="ticket-left">
+        <div class="ticket-header">
+          <span class="logo-text">A-EVENTS</span>
+          <span class="ticket-text">TICKET</span>
+        </div>
+        <h2>COACHELLA MUSIC FESTIVAL</h2>
+        <p>
+          Coachella (Coachella Valley Music and Arts Festival) is one of
+          the most famous music festivals in the world.
+        </p>
+      </div>
+
+      <div class="ticket-right">
+        <a href="https://www.coachella.com/passes"><img src="img/qr.png" alt="QR Code"></a>
+        <p>Get your ticket now</p>
+      </div>
+    </section>
+
+    <section class="events-scroll-section">
+      <h1 class="h1">Coming Events</h1>
+      <h3 class="h3">A special moment is just around the corner</h3>
+
+      <div class="scroll-container">
+        <button class="arr left" id="scroll-left">&#10094;</button>
+
+        <div class="event-scroll" id="event-scroll">
+
+          <div class="event-card">
+            <div class="event-hero">
+              <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?q=80&w=2070&auto=format&fit=crop" alt="Music Festival Stage">
+              <div class="event-date">
+                <div class="weekday">TUE</div>
+                <div class="day">20</div>
+              </div>
+            </div>
+            <div class="event-content">
+              <div class="event-info">
+                <div class="kicker">Music Festival</div>
+                <h2 class="title">Central City Stage</h2>
+                <p class="desc">An electrifying evening of live music and stunning stage effects.</p>
+                <div class="price">10,000 ₸ – 25,000 ₸</div>
+              </div>
+              <div class="event-side">
+                <div class="weekday-compact">Tue, 20</div>
+                <div class="time">8 PM</div>
+                <a class="btn" href="event page specific.html">Learn More</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card">
+             <div class="event-hero">
+                <img src="https://avatars.mds.yandex.net/i?id=9028b1c123ef095393977967601a22d7_l-10246134-images-thumbs&n=13" alt="Arizona Music Festival">
+                <div class="event-date">
+                    <div class="weekday">FRI</div>
+                    <div class="day">25</div>
+                </div>
+            </div>
+            <div class="event-content">
+              <div class="event-info">
+                <div class="kicker">Arizona Music Fest</div>
+                <h2 class="title">City Park Stage</h2>
+                <p class="desc">Warm nights filled with lights, beats, and incredible performances.</p>
+                 <div class="price">8,000 ₸ – 20,000 ₸</div>
+              </div>
+              <div class="event-side">
+                <div class="weekday-compact">Fri, 25</div>
+                <div class="time">9 PM</div>
+                <a class="btn" href="event page specific.html">Learn more</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-hero">
+              <img src="https://media.timeout.com/images/102856008/image.jpg" alt="Horror Escape Night">
+              <div class="event-date">
+                <div class="weekday">SAT</div>
+                <div class="day">31</div>
+              </div>
+            </div>
+            <div class="event-content">
+              <div class="event-info">
+                <div class="kicker">Horror Escape Night</div>
+                <h2 class="title">Empire Polo Club</h2>
+                <p class="desc">A thrilling night where mystery meets music — not for the faint-hearted!</p>
+                <div class="price">12,000 ₸ – 18,000 ₸</div>
+              </div>
+               <div class="event-side">
+                <div class="weekday-compact">Sat, 31</div>
+                <div class="time">10 PM</div>
+                <a class="btn" href="event page specific.html">Learn more</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="event-card">
+             <div class="event-hero">
+              <img src="https://t3.ftcdn.net/jpg/00/76/82/98/360_F_76829823_EaeWjihCtHc3kjvslZ7zn1qrsz6cIRSN.jpg" alt="Summer Vibes Festival">
+              <div class="event-date">
+                <div class="weekday">WED</div>
+                <div class="day">05</div>
+              </div>
+            </div>
+            <div class="event-content">
+              <div class="event-info">
+                <div class="kicker">Summer Vibes</div>
+                <h2 class="title">Beachside Arena</h2>
+                <p class="desc">Feel the summer heat with the best electronic music and dance.</p>
+                <div class="price">15,000 ₸ – 30,000 ₸</div>
+              </div>
+               <div class="event-side">
+                <div class="weekday-compact">Wed, 05</div>
+                <div class="time">7 PM</div>
+                <a class="btn" href="event page specific.html">Learn more</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <button class="arr right" id="scroll-right">&#10095;</button>
+      </div>
+    </section>
+  </main>
+
+
+  <section class="faq">
+    <h2>Frequently Asked <span>Questions</span></h2>
+
+    <div class="faq-tabs">
+      <button class="tab-button active" data-tab="tickets">Tickets</button>
+      <button class="tab-button" data-tab="venues">Venues</button>
+      <button class="tab-button" data-tab="refunds">Refunds</button>
+      <button class="tab-button" data-tab="general">General</button>
+    </div>
+
+    <div class="faq-content active" id="tickets">
+      <div class="faq-item">
+        <button class="faq-question">How can I buy tickets?</button>
+        <div class="faq-answer">
+          <p>You can buy tickets directly on our website by selecting your event and clicking “Get Tickets.”</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I transfer my ticket?</button>
+        <div class="faq-answer">
+          <p>Yes, tickets can be transferred to another person. Just contact our support team.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-content" id="venues">
+      <div class="faq-item">
+        <button class="faq-question">Where are most events held?</button>
+        <div class="faq-answer">
+          <p>Most events are hosted at Dark Park Arena or Atyrau Art Center.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is parking available?</button>
+        <div class="faq-answer">
+          <p>Yes, all venues have nearby parking spaces, including VIP parking options.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-content" id="refunds">
+      <div class="faq-item">
+        <button class="faq-question">Can I get a refund if I miss the event?</button>
+        <div class="faq-answer">
+          <p>Refunds are only available for canceled events. Please check our refund policy for details.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How long does a refund take?</button>
+        <div class="faq-answer">
+          <p>Refunds are usually processed within 5–7 business days after confirmation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-content" id="general">
+      <div class="faq-item">
+        <button class="faq-question">Do I need an account to book?</button>
+        <div class="faq-answer">
+          <p>No, but creating one makes it easier to track your bookings and receive updates.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you have a newsletter?</button>
+        <div class="faq-answer">
+          <p>Yes, subscribe to our weekly newsletter to stay updated on all upcoming events!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <div class="newsletter-text">
+        <h2>Subscribe to our <span>Newsletter</span></h2>
+        <p>Receive our weekly newsletter & updates with new events from your favourite organizers & venues.</p>
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm">
+        <div class="newsletter-input-container">
+          <input type="email" id="emailInput" placeholder="Enter your e-mail address" required>
+          <button type="submit">Subscribe</button>
+        </div>
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage">Thank you for subscribing to our newsletter!</div>
+      </form>
+
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <h2 class="logo">
+          <a href="home.html" aria-label="Homepage">
+            <span>A</span>-<span>v</span>e<span>n</span>t<span>s</span>
+          </a>
+        </h2>
+        <p>Your gateway to Atyrau's vibrant cultural scene.<br>
+          Discover concerts, exhibitions, and events that bring our community together.</p>
+        <div class="social-icons">
+          <a href="#"><img src="icons/instagram-logo.svg" alt="Instagram"></a>
+          <a href="#"><img src="icons/youtube-icon.svg" alt="YouTube"></a>
+          <a href="#"><img src="icons/tiktok-icon.svg" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="Events.html">All Events</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <ul>
+          <li><img src="icons/mail-icon.svg" alt="Email"> name@gmail.com</li>
+          <li><img src="icons/phone-icon.svg" alt="Phone"> +7 775 479 4622</li>
+          <li><img src="icons/map-icon-white.svg" alt="Address"> Elorda 24, Atyrau</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 A-vents. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Cookie policy</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const desired = [
+        'Music Festival',
+        'Arizona Music Fest',
+        'Horror Escape Night',
+        'Summer Vibes'
+      ];
+
+      fetch('events.json').then(r => r.json()).then(events => {
+        const cards = Array.from(document.querySelectorAll('.event-card'));
+        cards.forEach((card, idx) => {
+          const keyword = (desired[idx] || '').toLowerCase();
+          if (!keyword) return;
+          const foundIndex = events.findIndex(ev => (ev.title || '').toLowerCase().includes(keyword));
+          const btn = card.querySelector('.btn');
+          if (btn) {
+            if (foundIndex !== -1) {
+              btn.setAttribute('href', `event page specific.html?id=${foundIndex}`);
+              console.debug('Mapped card', idx, 'to event index', foundIndex, 'title=', events[foundIndex].title);
+            } else {
+              console.warn('No matching event found in events.json for', keyword, '— leaving link as-is');
+            }
+          }
+        });
+      }).catch(err => console.error('Failed to fetch events.json for mapping', err));
+    });
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector('.hamburger');
+      const mobileNav = document.getElementById('mobileNav');
+      const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileNav.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeMobileMenu.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      function setupDropdown(btn, dropdownContainer) {
+          btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              dropdownContainer.classList.toggle('show');
+          });
+      }
+      
+      const desktopLang = document.querySelector('header .lang');
+      const desktopLangBtn = document.querySelector('header .lang-btn');
+      if(desktopLang && desktopLangBtn) setupDropdown(desktopLangBtn, desktopLang);
+
+      const mobileLang = document.getElementById('mobileLang');
+      const mobileLangBtn = document.getElementById('mobileLangBtn');
+      if(mobileLang && mobileLangBtn) setupDropdown(mobileLangBtn, mobileLang);
+      
+      document.addEventListener('click', (e) => {
+        if (mobileNav && !mobileNav.contains(e.target) && hamburger && !hamburger.contains(e.target)) {
+          mobileNav.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        if (desktopLang && !desktopLang.contains(e.target)) {
+          desktopLang.classList.remove('show');
+        }
+        if (mobileLang && !mobileLang.contains(e.target)){
+            mobileLang.classList.remove('show');
+        }
+      });
+      
+
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+          } else {
+            scrollToTopBtn.classList.remove('show');
+          }
+        });
+        scrollToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      const scrollContainer = document.getElementById("event-scroll");
+      const leftBtn = document.getElementById("scroll-left");
+      const rightBtn = document.getElementById("scroll-right");
+
+      if (scrollContainer && leftBtn && rightBtn) {
+        leftBtn.addEventListener("click", () => {
+          scrollContainer.scrollBy({ left: -400, behavior: "smooth" });
+        });
+        rightBtn.addEventListener("click", () => {
+          scrollContainer.scrollBy({ left: 400, behavior: "smooth" });
+        });
+        
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        const start = (e) => {
+          isDown = true;
+          scrollContainer.classList.add('active');
+          startX = (e.pageX || e.touches[0].pageX) - scrollContainer.offsetLeft;
+          scrollLeft = scrollContainer.scrollLeft;
+        };
+
+        const end = () => {
+          isDown = false;
+          scrollContainer.classList.remove('active');
+        };
+
+        const move = (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = (e.pageX || e.touches[0].pageX) - scrollContainer.offsetLeft;
+          const walk = (x - startX) * 2;
+          scrollContainer.scrollLeft = scrollLeft - walk;
+        };
+        
+        scrollContainer.addEventListener('mousedown', start);
+        scrollContainer.addEventListener('mouseleave', end);
+        scrollContainer.addEventListener('mouseup', end);
+        scrollContainer.addEventListener('mousemove', move);
+
+        scrollContainer.addEventListener('touchstart', start, { passive: true });
+        scrollContainer.addEventListener('touchend', end);
+        scrollContainer.addEventListener('touchmove', move);
+
+      } else {
+        console.error("Scrolling container or buttons not found");
+      }
+    });
+
+
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const emailInput = document.getElementById('emailInput');
+      const errorMessage = document.getElementById('errorMessage');
+      const successMessage = document.getElementById('successMessage');
+      
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+      
+      const emailValue = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (!emailValue) {
+        errorMessage.textContent = 'Email is required';
+        errorMessage.style.display = 'block';
+        return;
+      }
+      
+      if (!emailRegex.test(emailValue)) {
+        errorMessage.textContent = 'Please enter a valid email address';
+        errorMessage.style.display = 'block';
+        return;
+      }
+      
+      successMessage.style.display = 'block';
+      emailInput.value = '';
+      
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000);
+    });
+
+
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.faq-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      document.getElementById(button.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      item.classList.toggle('active');
+    });
+  });
+  </script>
+</body>
+
+</html>
+

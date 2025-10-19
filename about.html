@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @font-face {
+      font-family: 'Druk Cyr';
+      src: url(DrukCyr-Bold.ttf) format('truetype');
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    header {
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: yellow;
+    }
+
+    .logo a {
+      color: inherit;
+      text-decoration: none;  
+    }
+
+    .logo a:visited { color: inherit; }
+
+    .logo a:hover { color: #ffe600; text-decoration: none; }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: yellow;
+    }
+
+    .lang {
+      position: relative;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: 35px;
+      right: 0;
+      background: black;
+      border: 1px solid yellow;
+      border-radius: 5px;
+      list-style: none;
+      padding: 10px 0;
+      display: none;
+      flex-direction: column;
+      min-width: 120px;
+      z-index: 1000;
+    }
+
+    .lang-dropdown li {
+      padding: 8px 15px;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .lang-dropdown li:hover {
+      background: yellow;
+      color: black;
+    }
+
+    .lang.show .lang-dropdown {
+      display: flex;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+      z-index: 1001;
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      right: -100%; 
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: black;
+      z-index: 999;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+    }
+
+    .mobile-nav-overlay.active {
+      right: 0;
+    }
+
+    .mobile-nav-overlay ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-nav-overlay ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav-overlay ul li a:hover,
+    .mobile-nav-overlay ul li a:focus {
+      color: yellow;
+    }
+
+    .mobile-nav-overlay ul li a.active {
+      color: yellow;
+    }
+
+    .mobile-nav-overlay .lang {
+      margin-top: 20px;
+      position: static;
+      display: block; 
+    }
+
+    .mobile-nav-overlay .lang-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px 0;
+      justify-content: flex-start; 
+    }
+
+    .mobile-nav-overlay .lang-btn img {
+      margin-right: 5px;
+    }
+
+    .mobile-nav-overlay .lang-dropdown {
+      position: static;
+      width: 100%;
+      border: 1px solid yellow;
+      border-radius: 5px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .mobile-nav-overlay .lang.show .lang-dropdown {
+      display: flex;
+    }
+
+    .close-mobile-menu {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid yellow;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .scroll-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-to-top:hover {
+      background: rgba(255, 255, 0, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .scroll-to-top img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .image-preview-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image-preview-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: hidden;
+    }
+
+    .image-preview-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 2px solid yellow;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+    }
+
+    .close-image-preview {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 50%;
+      z-index: 10000;
+      transition: background 0.3s;
+    }
+
+    .close-image-preview:hover {
+      background: rgba(255, 255, 0, 0.3);
+      color: yellow;
+    }
+
+    @media (max-width: 850px) {
+      .hamburger {
+        display: block;
+      }
+
+      nav {
+        display: none; 
+      }
+
+      .lang {
+        display: none;
+      }
+
+      header {
+        padding: 15px 20px;
+      }
+    }
+
+    .about-section {
+      position: relative;
+      height: 500px;
+      background: url(img/aboutus.png) center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: black;
+      padding: 0 20px;
+    }
+
+    .about-section h1 {
+      font-family: 'Druk Cyr', sans-serif;
+      font-size: 160px;
+      color: black;
+      font-weight: lighter;
+    }
+
+    .about-section p {
+      font-size: 18px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .mission-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px;
+      gap: 40px;
+      background: black;
+      flex-wrap: wrap;
+    }
+
+    .mission-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .mission-text h2 {
+      font-size: 60px;
+      font-family: 'Druk Cyr', sans-serif;
+      color: yellow;
+      margin-bottom: 20px;
+      font-weight: lighter;
+    }
+
+    .mission-text p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+
+    .mission-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .mission-image img {
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer; 
+      transition: transform 0.3s ease;
+    }
+
+    .mission-image img:hover {
+      transform: scale(1.02);
+    }
+
+    .mission-icons {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .mission-icons div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .mission-icons div i {
+      color: yellow;
+      font-size: 20px;
+    }
+
+    .what-we-do {
+      text-align: center;
+      padding: 80px 60px;
+      background-color: black;
+    }
+
+    .what-we-do h2 {
+      font-size: 60px;
+      color: yellow;
+      margin-bottom: 10px;
+      font-family: 'Druk Cyr', sans-serif;
+      font-weight: lighter;
+    }
+
+    .what-we-do p {
+      font-size: 18px;
+      color: #ddd;
+      margin-bottom: 60px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: black;
+      border: 1px solid yellow;
+      border-radius: 10px;
+      padding: 30px 20px;
+      width: 280px;
+      height: 300px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card-icon {
+      background: yellow;
+      color: black;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 20px auto;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: #000;
+      color: #ffffff;
+      padding: 40px 60px 20px;
+      border-top: 1px solid #222;
+      font-family: Arial, sans-serif;
+      text-align: left;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-left {
+      max-width: 35%;
+      min-width: 250px;
+    }
+
+    .footer-left .logo {
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    .footer-left p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #aaa;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin-right: 12px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .social-icons a:hover {
+      opacity: 1;
+    }
+
+    .footer-links h3,
+    .footer-contact h3 {
+      color: #e6ff00;
+      margin-bottom: 15px;
+      font-family: 'Anton', sans-serif;
+      font-weight: lighter;
+    }
+
+    .footer-links ul,
+    .footer-contact ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #e6ff00;
+    }
+
+    .footer-contact li img {
+      margin-right: 10px;
+      width: 16px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .footer-bottom a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+    .footer-bottom a:hover {
+      color: #e6ff00;
+    }
+
+    @media (max-width: 1200px) {
+      .about-section h1 {
+        font-size: 120px;
+      }
+      .mission-text h2,
+      .what-we-do h2 {
+        font-size: 48px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .about-section {
+        height: 400px;
+      }
+
+      .about-section h1 {
+        font-size: 90px;
+      }
+
+      .mission-section {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+
+      .what-we-do {
+        padding: 60px 30px;
+      }
+
+      .cards {
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+        .footer-left {
+            max-width: 100%;
+        }
+        .footer-container {
+            flex-direction: column;
+        }
+        .footer-contact ul {
+            justify-content: center;
+        }
+        .footer-bottom {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+
+
+    @media (max-width: 600px) {
+      .about-section {
+        height: 300px;
+      }
+
+      .about-section h1 {
+        font-size: 60px;
+      }
+
+      .about-section p {
+        font-size: 14px;
+      }
+
+      .mission-text h2 {
+        font-size: 36px;
+      }
+
+      .what-we-do h2 {
+        font-size: 40px;
+      }
+
+      footer {
+        padding: 30px 20px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-left {
+            max-width: 100%;
+      }
+
+      .footer-contact ul {
+            justify-content: center;
+      } 
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2 class="logo">
+      <a href="home.html" aria-label="Homepage">
+        <span>A</span>-<span>v</span>e<span>n</span>t<span>s</span>
+      </a>
+    </h2>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="Events.html">Events</a></li>
+        <li><a href="about.html" class="active">About us</a></li>
+      </ul>
+    </nav>
+    <div class="lang">
+      <button class="lang-btn">
+        <img src="icons/language_icon.png" alt="language_icon" width="20">
+        <span>Eng ▼</span>
+      </button>
+      <ul class="lang-dropdown">
+        <li data-lang="en">English</li>
+        <li data-lang="ru">Русский</li>
+        <li data-lang="kz">Қазақша</li>
+      </ul>
+    </div>
+    <button class="hamburger">☰</button>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <button class="close-mobile-menu" id="closeMobileMenu">×</button>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="Events.html">Events</a></li>
+      <li><a href="about.html" class="active">About us</a></li>
+      <div class="lang" id="mobileLang">
+        <button class="lang-btn" id="mobileLangBtn">
+          <img src="icons/language_icon.png" alt="language_icon" width="20">
+          <span>Eng ▼</span>
+        </button>
+        <ul class="lang-dropdown" id="mobileLangDropdown">
+          <li data-lang="en">English</li>
+          <li data-lang="ru">Русский</li>
+          <li data-lang="kz">Қазақша</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+
+  <button class="scroll-to-top" id="scrollToTop" title="Go to top">
+    <img src="https://img.icons8.com/ios-filled/50/f7ef4d/up--v1.png" alt="arrow up">
+  </button>
+
+  <div class="image-preview-modal" id="imagePreviewModal">
+    <div class="image-preview-content">
+      <button class="close-image-preview" id="closeImagePreview">×</button>
+      <img id="previewImage" src="" alt="Preview">
+    </div>
+  </div>
+
+  <section class="about-section">
+    <h1>About Us</h1>
+    <p>Connecting communities through culture, creativity, and shared experiences</p>
+  </section>
+
+  <section class="mission-section">
+    <div class="mission-text">
+      <h2>Our Mission</h2>
+      <p>“A-vents” was created to bridge the gap between amazing cultural experiences and the people who seek them. 
+         We believe that art, music, and community events have the power to bring people together, spark creativity, 
+         and enrich lives.</p>
+
+      <p>Whether you're a longtime resident or just visiting Atyrau, our platform makes it easy to discover concerts, 
+         exhibitions, festivals, and cultural events that match your interests and schedule.</p>
+
+      <div class="mission-icons">
+        <div><i><img src="icons/heart-icon.svg" alt="heart-icon" width="20"></i> Community-Focused</div>
+        <div><i><img src="icons/people-icon.svg" alt="people-icon" width="20"></i> Locally Curated</div>
+        <div><i><img src="icons/calendar-icon.svg" alt="calendar-icon" width="20"></i> Always Updated</div>
+      </div>
+    </div>
+
+    <div class="mission-image">
+      <img src="img/mission.png" alt="Concert Image" id="missionImage">
+    </div>
+  </section>
+
+  <section class="what-we-do">
+    <h2>What We Do</h2>
+    <p>We're your comprehensive guide to Atyrau's vibrant cultural scene</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><img src="icons/calendar-icon-black.svg" alt="calendar-icon" width="30"></div>
+        <h3>Event Discovery</h3>
+        <p>Browse and discover concerts, art exhibitions, festivals, and cultural events happening throughout Atyrau.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><img src="icons/people-icon-black.svg" alt="people-icon" width="30"></div>
+        <h3>Community Connection</h3>
+        <p>Stay connected with our newsletter and social updates. Be the first to know about new events.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><img src="icons/map-icon.svg" alt="map-icon" width="30"></div>
+        <h3>Local Insights</h3>
+        <p>Get detailed information about venues, neighborhoods, and the stories behind each event.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <h2 class="logo">
+          <a href="home.html" aria-label="Homepage">
+            <span>A</span>-<span>v</span>e<span>n</span>t<span>s</span>
+          </a>
+        </h2>
+        <p>Your gateway to Atyrau's vibrant cultural scene.<br>
+          Discover concerts, exhibitions, and events that bring our community together.</p>
+        <div class="social-icons">
+          <a href="#"><img src="icons/instagram-logo.svg" alt="Instagram"></a>
+          <a href="#"><img src="icons/youtube-icon.svg" alt="YouTube"></a>
+          <a href="#"><img src="icons/tiktok-icon.svg" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="Events.html">All Events</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <ul>
+          <li><img src="icons/mail-icon.svg" alt="Email"> name@gmail.com</li>
+          <li><img src="icons/phone-icon.svg" alt="Phone"> +7 775 479 4622</li>
+          <li><img src="icons/map-icon-white.svg" alt="Address"> Elorda 24, Atyrau</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 A-vents. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Cookie policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
+    
+    const mobileLang = document.getElementById('mobileLang');
+    const mobileLangBtn = document.getElementById('mobileLangBtn');
+    const mobileLangDropdown = document.getElementById('mobileLangDropdown');
+    const mobileLangText = mobileLangBtn.querySelector('span');
+
+    hamburger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      mobileNav.classList.add('active');
+      document.body.style.overflow = 'hidden'; 
+      mobileLang.classList.remove('show');
+    });
+
+    closeMobileMenu.addEventListener('click', function() {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = ''; 
+      mobileLang.classList.remove('show');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!mobileNav.contains(e.target) && 
+          !hamburger.contains(e.target) && 
+          e.target !== hamburger) {
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = ''; 
+        mobileLang.classList.remove('show');
+      }
+    });
+
+    const desktopLang = document.querySelector('.lang');
+    const desktopLangBtn = document.querySelector('.lang-btn');
+    const desktopLangDropdown = document.querySelector('.lang-dropdown');
+    const desktopLangText = desktopLangBtn.querySelector('span');
+
+    desktopLangBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      desktopLang.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!desktopLang.contains(e.target) && !desktopLangBtn.contains(e.target)) {
+        desktopLang.classList.remove('show');
+      }
+    });
+
+    desktopLangDropdown.querySelectorAll('li').forEach(item => {
+      item.addEventListener('click', () => {
+        desktopLangText.innerHTML = item.textContent + ' ▼';
+        desktopLang.classList.remove('show');
+      });
+    });
+
+    mobileLangBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileLang.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileLang.contains(e.target) && !mobileLangBtn.contains(e.target)) {
+        mobileLang.classList.remove('show');
+      }
+    });
+
+    mobileLangDropdown.querySelectorAll('li').forEach(item => {
+      item.addEventListener('click', () => {
+        mobileLangText.innerHTML = item.textContent + ' ▼';
+        mobileLang.classList.remove('show');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const missionImage = document.getElementById('missionImage');
+      const imagePreviewModal = document.getElementById('imagePreviewModal');
+      const previewImage = document.getElementById('previewImage');
+      const closeImagePreview = document.getElementById('closeImagePreview');
+
+      if (missionImage && imagePreviewModal && previewImage && closeImagePreview) {
+        missionImage.addEventListener('click', function() {
+          previewImage.src = this.src;
+          previewImage.alt = this.alt;
+          imagePreviewModal.style.display = 'flex';
+          document.body.style.overflow = 'hidden'; 
+        });
+
+        closeImagePreview.addEventListener('click', function() {
+          imagePreviewModal.style.display = 'none';
+          document.body.style.overflow = '';
+        });
+
+        imagePreviewModal.addEventListener('click', function(e) {
+          if (e.target === imagePreviewModal) {
+            imagePreviewModal.style.display = 'none';
+            document.body.style.overflow = ''; 
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            imagePreviewModal.style.display = 'none';
+            document.body.style.overflow = ''; 
+          }
+        });
+      } else {
+        console.log('One or more image preview elements not found');
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      
+      if (scrollToTopBtn) {
+        window.addEventListener('scroll', function() {
+          if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+          } else {
+            scrollToTopBtn.classList.remove('show');
+          }
+        });
+        
+        scrollToTopBtn.addEventListener('click', function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

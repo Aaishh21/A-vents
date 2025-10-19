@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-vents — All Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <header>
+    <h2 class="logo">
+      <a href="home.html" aria-label="Homepage">
+        <span>A</span>-<span>v</span>e<span>n</span>t<span>s</span>
+      </a>
+    </h2>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#" class="active">Events</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </nav>
+    <div class="lang">
+      <button class="lang-btn">
+        <img src="icons/language_icon.png" alt="language_icon" width="20">
+        <span>Eng ▼</span>
+      </button>
+      <ul class="lang-dropdown">
+        <li data-lang="en">English</li>
+        <li data-lang="ru">Русский</li>
+        <li data-lang="kz">Қазақша</li>
+      </ul>
+    </div>
+    <button class="hamburger">☰</button>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileNav">
+    <button class="close-mobile-menu" id="closeMobileMenu">×</button>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="Events.html" class="active">Events</a></li>
+      <li><a href="about.html">About us</a></li>
+      <div class="lang" id="mobileLang">
+        <button class="lang-btn" id="mobileLangBtn">
+          <img src="icons/language_icon.png" alt="language_icon" width="20">
+          <span>Eng ▼</span>
+        </button>
+        <ul class="lang-dropdown" id="mobileLangDropdown">
+          <li data-lang="en">English</li>
+          <li data-lang="ru">Русский</li>
+          <li data-lang="kz">Қазақша</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+
+  <button class="scroll-to-top" id="scrollToTop" title="Go to top">
+    <img src="https://img.icons8.com/ios-filled/50/f7ef4d/up--v1.png" alt="arrow up">
+  </button>
+ 
+ <section class="hero">
+    <h1><span class="highlight">All</span> Events</h1>
+    <p>Experience the best concerts, exhibitions, and cultural events<br>around <span class="yellow">Atyrau</span>.</p>
+
+    <div class="filters">
+      <input type="text" id="search-input" placeholder="🔍 Search events...">
+      <select id="category-filter">
+          <option value="all">All Categories</option>
+      </select>
+      <select id="area-filter">
+          <option value="all">All Areas</option>
+      </select>
+      <select id="sort-filter">
+          <option value="none">Sorting</option>
+          <option value="date-asc">Sort by Date (Newest)</option>
+          <option value="date-desc">Sort by Date (Oldest)</option>
+          <option value="price-asc">Price (Low to High)</option>
+          <option value="price-desc">Price (High to Low)</option>
+      </select>
+    </div>
+ </section>
+
+ <section class="events-list" id="events-list">
+   <!-- Events will be rendered here from events.json -->
+ </section>
+ <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <h2 class="logo">
+          <a href="home.html" aria-label="Homepage">
+            <span>A</span>-<span>v</span>e<span>n</span>t<span>s</span>
+          </a>
+        </h2>
+        <p>Your gateway to Atyrau's vibrant cultural scene.<br>
+          Discover concerts, exhibitions, and events that bring our community together.</p>
+        <div class="social-icons">
+          <a href="#"><img src="icons/instagram-logo.svg" alt="Instagram"></a>
+          <a href="#"><img src="icons/youtube-icon.svg" alt="YouTube"></a>
+          <a href="#"><img src="icons/tiktok-icon.svg" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="Events.html">All Events</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <ul>
+          <li><img src="icons/mail-icon.svg" alt="Email"> name@gmail.com</li>
+          <li><img src="icons/phone-icon.svg" alt="Phone"> +7 775 479 4622</li>
+          <li><img src="icons/map-icon-white.svg" alt="Address"> Elorda 24, Atyrau</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 A-vents. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Cookie policy</a>
+      </div>
+    </div>
+  </footer>
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        const closeMenu = () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        closeMobileMenu.addEventListener('click', closeMenu);
+        document.addEventListener('click', (e) => {
+            if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        const setupLangDropdown = (container, btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                container.classList.toggle('show');
+            });
+            
+            container.querySelectorAll('li').forEach(item => {
+                item.addEventListener('click', () => {
+                    btn.querySelector('span').innerHTML = item.textContent + ' ▼';
+                    container.classList.remove('show');
+                });
+            });
+        };
+        
+        const desktopLang = document.querySelector('.lang');
+        const desktopLangBtn = desktopLang.querySelector('.lang-btn');
+        setupLangDropdown(desktopLang, desktopLangBtn);
+
+        const mobileLang = document.getElementById('mobileLang');
+        const mobileLangBtn = document.getElementById('mobileLangBtn');
+        setupLangDropdown(mobileLang, mobileLangBtn);
+
+        document.addEventListener('click', (e) => {
+            if (!desktopLang.contains(e.target)) {
+                desktopLang.classList.remove('show');
+            }
+            if (!mobileLang.contains(e.target) && mobileNav.classList.contains('active')) {
+                mobileLang.classList.remove('show');
+            }
+        });
+
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        if (scrollToTopBtn) {
+            window.addEventListener('scroll', () => {
+                scrollToTopBtn.classList.toggle('show', window.pageYOffset > 300);
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        const searchInput = document.getElementById('search-input');
+        const categoryFilter = document.getElementById('category-filter');
+        const areaFilter = document.getElementById('area-filter');
+        const sortFilter = document.getElementById('sort-filter');
+        const eventsList = document.getElementById('events-list');
+        let eventCards = [];
+
+        async function loadAndRenderEvents() {
+          try {
+            const url = `events.json?t=${Date.now()}`;
+            console.debug('Fetching events.json (loadAndRenderEvents) with url=', url);
+            const res = await fetch(url, { cache: 'no-cache' });
+            const events = await res.json();
+            console.debug('loadAndRenderEvents: fetched events count=', events && events.length);
+            eventsList.innerHTML = '';
+              events.forEach((ev, idx) => {
+              const card = document.createElement('div');
+              card.className = 'event-card';
+              card.dataset.id = idx;
+                  let linkHref = `event page specific.html?id=${idx}`;
+                  const titleLower = (ev.title || '').toString().toLowerCase();
+                  if (titleLower.includes('extreme horror night') || titleLower === 'extreme horror night') {
+                    linkHref = 'event page specific.html';
+                  }
+              card.dataset.category = ev.category || 'General';
+              card.dataset.area = ev.location || '';
+              card.dataset.date = ev.isoDate || ev.date || '';
+              card.dataset.price = ev.priceNum || 0;
+
+              card.innerHTML = `
+                <img src="${ev.image || ''}" alt="${(ev.title||'event')}">
+                <div class="event-info">
+                  <h2>${ev.title || ''}</h2>
+                  <p class="date">${ev.date || ''}</p>
+                  <p class="place">${ev.location || ''}</p>
+                  <p class="desc">${ev.description || ''}</p>
+                  <div class="price">${ev.price || ''}</div>
+                      <!-- details link -->
+                      <a href="${linkHref}" class="details-btn">View Details →</a>
+                </div>
+              `;
+
+              eventsList.appendChild(card);
+            });
+
+            eventCards = Array.from(eventsList.querySelectorAll('.event-card'));
+            console.debug('loadAndRenderEvents: rendered eventCards count=', eventCards.length);
+            populateFilters();
+            applyFiltersAndSort();
+          } catch (err) {
+            console.error('Failed to load events.json', err);
+            eventsList.innerHTML = `
+              <div style="color:#ffb4b4; padding:16px; background:#2b2b2b; border-radius:8px;">
+                <h3 style="color:#ffdede; margin-top:0">Failed to load events.json</h3>
+                <p>The browser blocked loading <code>events.json</code>. If you opened this page with <code>file://</code>, Chrome often blocks fetch requests.
+                To test with a separate <code>events.json</code> file, serve the folder over HTTP and open the page via <code>http://localhost</code>.</p>
+                <p>Quick PowerShell test (from the project folder):</p>
+                <pre style="background:#111;color:#fff;padding:8px;border-radius:4px">cd 'C:\\Users\\Acer\\Downloads\\City Events Project Work\\project work'
+python -m http.server 8000</pre>
+                <p>Or with Node (npm):</p>
+                <pre style="background:#111;color:#fff;padding:8px;border-radius:4px">npm install -g serve
+serve -l 8000</pre>
+                <p>Then open <a href="http://localhost:8000/Events.html" style="color:#ffdede">http://localhost:8000/Events.html</a> in Chrome.</p>
+                <p style="margin-top:8px"><button id="events-retry" style="background:#ffdede;border:0;padding:8px 12px;border-radius:6px;cursor:pointer">Retry</button></p>
+              </div>
+            `;
+            const retryBtn = document.getElementById('events-retry');
+            if (retryBtn) retryBtn.addEventListener('click', () => { initEvents(); });
+          }
+        }
+
+        function populateFilters() {
+          categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+          areaFilter.innerHTML = '<option value="all">All Areas</option>';
+          const categories = new Set();
+          const areas = new Set();
+          eventCards.forEach(card => {
+            categories.add(card.dataset.category);
+            areas.add(card.dataset.area);
+          });
+          console.debug('populateFilters: categories=', Array.from(categories), 'areas=', Array.from(areas));
+
+          categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+          });
+
+          areas.forEach(area => {
+            const option = document.createElement('option');
+            option.value = area;
+            option.textContent = area;
+            areaFilter.appendChild(option);
+          });
+        }
+
+    let allEventsData = [];
+    let initiallyShown = 4;
+    const loadMoreBtn = document.createElement('button');
+    loadMoreBtn.id = 'load-more-btn';
+    loadMoreBtn.textContent = 'Load More';
+    loadMoreBtn.style.display = 'none';
+    loadMoreBtn.addEventListener('click', () => {
+      renderEvents(allEventsData.slice(initiallyShown));
+      loadMoreBtn.style.display = 'none';
+      eventCards = Array.from(eventsList.querySelectorAll('.event-card'));
+      populateFilters();
+      applyFiltersAndSort();
+    });
+    eventsList.insertAdjacentElement('afterend', loadMoreBtn);
+    
+    function renderEvents(eventsToRender, startIdx = 0) {
+      eventsToRender.forEach((ev, idx) => {
+        const realIdx = startIdx + idx;
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        card.dataset.id = realIdx;
+        const titleLower = (ev.title || '').toString().toLowerCase();
+        let linkHref = `event page specific.html?id=${realIdx}`;
+        if (titleLower.includes('extreme horror night') || titleLower === 'extreme horror night') linkHref = 'event page specific.html';
+        card.dataset.category = ev.category || 'General';
+        card.dataset.area = ev.location || '';
+        card.dataset.date = ev.isoDate || ev.date || '';
+        card.dataset.price = ev.priceNum || 0;
+        card.innerHTML = `
+          <img src="${ev.image || ''}" alt="${(ev.title||'event')}">
+          <div class="event-info">
+            <h2>${ev.title || ''}</h2>
+            <p class="date">${ev.date || ''}</p>
+            <p class="place">${ev.location || ''}</p>
+            <p class="desc">${ev.description || ''}</p>
+            <div class="price">${ev.price || ''}</div>
+            <a href="${linkHref}" class="details-btn">View Details →</a>
+          </div>
+        `;
+        eventsList.appendChild(card);
+      });
+    }
+
+    async function initEvents() {
+      try {
+  const url = `events.json?t=${Date.now()}`;
+  console.debug('Fetching events.json (initEvents) with url=', url);
+  const res = await fetch(url, { cache: 'no-cache' });
+  const events = await res.json();
+        allEventsData = events;
+        renderEvents(allEventsData.slice(0, initiallyShown), 0);
+        if (allEventsData.length > initiallyShown) {
+          loadMoreBtn.style.display = '';
+        }
+        eventCards = Array.from(eventsList.querySelectorAll('.event-card'));
+        populateFilters();
+        applyFiltersAndSort();
+      } catch (err) {
+        console.error('Failed to load events.json', err);
+        eventsList.innerHTML = `
+          <div style="color:#ffb4b4; padding:16px; background:#2b2b2b; border-radius:8px;">
+            <h3 style="color:#ffdede; margin-top:0">Failed to load events.json</h3>
+            <p>This page uses a separate <code>events.json</code> file. Chrome may block fetch() when opening the page via <code>file://</code>. To fix, serve this folder over HTTP (local server) and reopen the page.</p>
+            <p>Quick PowerShell test (from the project folder):</p>
+            <pre style="background:#111;color:#fff;padding:8px;border-radius:4px">cd 'C:\\Users\\Acer\\Downloads\\City Events Project Work\\project work'
+python -m http.server 8000</pre>
+            <p>Then open <a href="http://localhost:8000/Events.html" style="color:#ffdede">http://localhost:8000/Events.html</a> in Chrome.</p>
+            <p style="margin-top:8px"><button id="events-retry" style="background:#ffdede;border:0;padding:8px 12px;border-radius:6px;cursor:pointer">Retry</button></p>
+          </div>
+        `;
+        const retryBtn2 = document.getElementById('events-retry');
+        if (retryBtn2) retryBtn2.addEventListener('click', () => { initEvents(); });
+      }
+    }
+
+    initEvents();
+        const applyFiltersAndSort = () => {
+      console.debug('applyFiltersAndSort: eventCards=', eventCards.length, 'sort=', sortFilter.value);
+            const searchValue = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+            const areaValue = areaFilter.value;
+            const sortValue = sortFilter.value;
+
+            const visibleCards = eventCards.filter(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                const desc = card.querySelector('.desc').textContent.toLowerCase();
+                const place = card.querySelector('.place').textContent.toLowerCase();
+                
+                const searchMatch = title.includes(searchValue) || desc.includes(searchValue) || place.includes(searchValue);
+                const categoryMatch = categoryValue === 'all' || card.dataset.category === categoryValue;
+                const areaMatch = areaValue === 'all' || card.dataset.area === areaValue;
+                
+                return searchMatch && categoryMatch && areaMatch;
+            });
+            
+            let sortedCards = [...visibleCards];
+            
+            switch (sortValue) {
+                case 'date-asc':
+                    sortedCards.sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
+                    break;
+                case 'date-desc':
+                    sortedCards.sort((a, b) => new Date(a.dataset.date) - new Date(b.dataset.date));
+                    break;
+                case 'price-asc':
+                    sortedCards.sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
+                    break;
+                case 'price-desc':
+                    sortedCards.sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
+                    break;
+            }
+            
+            eventsList.innerHTML = '';
+            if (sortedCards.length === 0) {
+              console.debug('applyFiltersAndSort: no cards to display');
+            }
+            sortedCards.forEach(card => eventsList.appendChild(card));
+        };
+        
+        [searchInput, categoryFilter, areaFilter, sortFilter].forEach(el => {
+            el.addEventListener('input', applyFiltersAndSort);
+            el.addEventListener('change', applyFiltersAndSort);
+        });
+
+    });
+ </script>
+</body>
+</html>
+
