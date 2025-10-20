@@ -17,7 +17,7 @@ A modern, responsive website for discovering and booking cultural events in Atyr
 Visit the live website: [https://aaishh21.github.io/A-vents/](https://aaishh21.github.io/A-vents/)
 
 # Project Structure
-
+```
 A-vents/
 ├── index.html              # Homepage (main landing page)
 ├── Events.html             # Events listing page with filters
@@ -30,6 +30,7 @@ A-vents/
 ├── icons/                 # Icon assets
 ├── img/                   # Image assets
 └── README.md              # This file
+```
 
 # Technologies Used
 
