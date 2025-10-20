@@ -790,15 +790,37 @@
             overflow-x: hidden;
         }
 
+        .hero {
+            padding: 40px 15px 10px;
+        }
+
         .hero h1 {
-            font-size: 1.9em;
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
         }
+        
+        .hero .highlight {
+            font-size: 16px;
+            padding: 4px 12px;
+            margin: 0 5px;
+            border-radius: 25px;
+        }
+        
         .hero img {
-            width: 1.1 em;
+            width: 1.1em;
         }
+        
+        .artist-group {
+            margin: 30px auto 0;
+            width: 95%;
+        }
+        
         .ticker {
-            font-size: 0.9em;
+            font-size: 1.8rem;
+            height: 70px;
         }
+        
         .events-scroll-section .h1 {
             font-size: 1.3em;
         }
@@ -810,9 +832,9 @@
             align-items: center;
             gap: 10px;
         }
-    .hero .highlight img {
-      display: none !important;
-    }
+        .hero .highlight img {
+          display: none !important;
+        }
     }
 
 
